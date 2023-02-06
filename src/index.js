@@ -7,8 +7,6 @@ import API  from './fetchCountries';
 import debounce from 'lodash.debounce';
 import Notiflix from 'notiflix';
 
-
-
 const inputSearch = document.querySelector('#search-box');
 const countryInfo = document.querySelector('.country-info');
 const countryList = document.querySelector('.country-list');
@@ -37,7 +35,7 @@ function renderCountryCard(countries) {
     countryInfo.innerHTML = '';
     if (countries.length === 1) {
         countryList.insertAdjacentHTML('beforeend', createFlagMarkup(countries));
-    countryInfo.insertAdjacentHTML(
+        countryInfo.insertAdjacentHTML(
         'beforeend',
         createCountriesMarkup(countries)
         );
@@ -48,6 +46,12 @@ function renderCountryCard(countries) {
     }
 }
 
+function onManyMatches() {
+    Notiflix.Notify.info(
+        'Too many matches found. Please enter a more specific name.'
+    );
+
+}
 function onFetchError() {
-  Notiflix.Notify.warning(`Oops, there is no country with that name`);
+    Notiflix.Notify.warning(`Oops, there is no country with that name`);
 }
